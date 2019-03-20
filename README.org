@@ -1,0 +1,40 @@
+This is the simple implementation of Naive Bayes classifier using python.Here this system predict that, a song(input to system for test) belongs to which artist.
+
+*HOW WE CAN USE IT*:
+
+There are some files in your cloned folder and they are used for different purpose.let's discuss about it.
+
+*requirements.txt*
+- If you want to run this scripts, first of all you must install all the requirements.
+- You can install all the requirements usig: 
+  #+BEGIN_SRC 
+    pip install -r requirements.txt
+  #+END_SRC
+
+*audio_classifier.py*
+- You have an audio file of a song and you want to predict it.yup let's use this script just go and download a song from some where.
+- I already add some files in Audio_dir if you want to add more follow the steps below.
+- I download from songs YouTube and it is in video format, so first i convert it into .wav format using ffmpeg.
+- You can install it by :
+   #+BEGIN_SRC 
+     pip install ffmpeg
+   #+END_SRC 
+- Note that this only work for WAV, AIFF, file formats.
+- You can convert it in to WAV using ffmpeg by :
+   #+BEGIN_SRC 
+     ffmpeg -i filename.mp3 newfilename.wav
+   #+END_SRC
+- Now you have a .wav file and now you go to folder Audio_dir and make a folder with in the name of song and put that corresponding .wav in it.
+- Now you will split that song in to many parts Google Cloud Speech API only accepts files no longer than 60 seconds. To be on the safe side, I broke my files in 10-second chunks. To do that I used an open source command line library called ffmpeg. 
+   #+BEGIN_SRC 
+     ffmpeg -i filename.wav -f segment -segment_time 10 -c copy out%09d.wav
+   #+END_SRC
+- Ok- now you split your WAV in to many parts so, now you delete the full .wav file from folder
+- Now your input data to audio_classifier is ready.
+- Now you can run audio classifier.py
+- Accuracy is poor so select good songs with sound clarity and less instrumental noise for test.
+
+*Simple explanation about other files and folders.*
+
+- Audio_dir          : songs for convertion
+- audio_text_data    : converted text data.this data used as test data for audio_classifer.py
